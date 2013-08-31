@@ -51,6 +51,17 @@
             bemgen[name] = getPropExtender(name);
         });
 
+        // mix
+        bemgen.mix = function(params) {
+            if (!Array.isArray(_ctx.mix))
+                _ctx.mix = _ctx.mix ? [_ctx.mix] : [];
+
+            if (params)
+                _ctx.mix = _ctx.mix.concat(params);
+
+            return bemgen;
+        };
+
         // content
         bemgen.content = function() {
             return bemgen.apply(this, arguments);
