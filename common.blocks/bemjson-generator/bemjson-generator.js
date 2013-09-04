@@ -174,10 +174,16 @@
             return buf.join('');
         };
 
+        // shortcuts
+        var shortcuts = { b: 'block', e: 'elem', m: 'mods' };
+        Object.keys(shortcuts).forEach(function(name) {
+            bemgen[name] = bemgen[shortcuts[name]];
+        });
+
         return bemgen;
     }
 
-    ['ctx', 'block', 'elem', 'tag'].forEach(function(name) {
+    ['ctx', 'block', 'elem', 'tag', 'b', 'e'].forEach(function(name) {
        exports[name] = function() {
            return BEMGEN()[name].apply(this, arguments);
        }

@@ -18,3 +18,7 @@ console.log(JSON.stringify(
         )
         .html()
     , false, '  '));
+
+console.log(JSON.stringify(
+    b('link').e('inner').m({ valign: 'middle' }).content('yandex').html()
+    , false, '  '));
