@@ -6,9 +6,13 @@
      * @param source
      */
     function extend(dest, source) {
+        dest || (dest = {})
+
         for (var i in source)
             if (source.hasOwnProperty(i))
                 dest[i] = source[i];
+
+        return dest;
     }
 
     function BEMGEN() {
@@ -169,7 +173,7 @@
                         }
                     }
 
-                    (mixClasses || block || elem || cls) &&  buf.push(' class="', buildClasses(block, elem, node.mods), mixClasses, jsParams ? ' i-bem': '', '"');
+                    (mixClasses || block || elem || cls) &&  buf.push(' class="', buildClasses(block, elem, extend(node.mods, node.elemMods)), mixClasses, jsParams ? ' i-bem': '', '"');
                     jsParams && buf.push(' onclick=" return ', JSON.stringify(jsParams), '"');
 
                     if (node.attrs) {
