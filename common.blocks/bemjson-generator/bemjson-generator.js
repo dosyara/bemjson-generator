@@ -33,11 +33,23 @@
 
                     return bemgen;
                 }
+            },
+            getNestedPropSetter = function (propName) {
+                return function(name, value) {
+                    _ctx[propName] || (_ctx[propName] = {});
+
+                    _ctx[propName][name] = value;
+
+                    return bemgen;
+                }
             };
 
         // ctx
-        bemgen.ctx = function(params) {
-            extend(_ctx, params);
+        bemgen.ctx = function(name, value) {
+            if (typeof name == 'object')
+                extend(_ctx, name);
+            else
+                _ctx[name] = value;
 
             return bemgen;
         };
@@ -50,6 +62,12 @@
         // extenders
         ['mods', 'elemMods', 'attrs'].forEach(function(name) {
             bemgen[name] = getPropExtender(name);
+        });
+
+        // shortForms
+        var shortForms = { mod: 'mods', elemMod: 'elemMods', attr: 'attrs' };
+        Object.keys(shortForms).forEach(function(name) {
+            bemgen[name] = getNestedPropSetter(shortForms[name]);
         });
 
         // mix
