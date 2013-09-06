@@ -18,7 +18,8 @@
     function BEMGEN() {
         var _ctx = {},
             bemgen = function(content) {
-                _ctx.content = arguments.length > 1 ? Array.prototype.slice.call(arguments) : content;
+                if (content)
+                    _ctx.content = arguments.length > 1 ? Array.prototype.slice.call(arguments) : content;
 
                 return _ctx;
             },
