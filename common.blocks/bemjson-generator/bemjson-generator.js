@@ -151,7 +151,7 @@
                         }
                     }
 
-                    buf.push(' class="', buildClasses(block, elem, node.mods), mixClasses, jsParams ? ' i-bem': '', '"');
+                    (mixClasses || block || elem || cls) &&  buf.push(' class="', buildClasses(block, elem, node.mods), mixClasses, jsParams ? ' i-bem': '', '"');
                     jsParams && buf.push(' onclick=" return ', JSON.stringify(jsParams), '"');
 
                     if (node.attrs) {
